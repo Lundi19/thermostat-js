@@ -1,40 +1,36 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const updateTemperature() = () => {
+  const updateTemperature = () => {
     document.querySelector('#temperature').innerText = thermostat.temperature;
+    document.querySelector('#temperature').className = thermostat.energyUsage();
   }
 
   const thermostat = new Thermostat();
   updateTemperature();
 
-  document.querySelector('#temperature-up').addEventListener('click', () => {
-    thermostat.up();
+  document.querySelector('#up').addEventListener('click', () => {
+    thermostat.up(1);
     updateTemperature();
   });
 
-  document.querySelector('#temperature-down').addEventListener('click', () => {
-    thermostat.down();
+  document.querySelector('#down').addEventListener('click', () => {
+    thermostat.down(1);
     updateTemperature();
   });
 
-  document.querySelector('#temperature-reset').addEventListener('click', () => {
-    thermostat.resetTemperature();
+  document.querySelector('#reset').addEventListener('click', () => {
+    thermostat.reset();
     updateTemperature();
   });
 
-  document.querySelector('#powersaving-on').addEventListener('click', () => {
-    thermostat.switchPowerSavingModeOn();
-    document.querySelector('#power-saving-status').innerText = 'on';
+  document.querySelector('#PSM_on').addEventListener('click', () => {
+    thermostat.powersave = true;
+    document.querySelector('#power-save-status').innerText = 'on';
     updateTemperature();
   })
 
-  document.querySelector('#powersaving-off').addEventListener('click', () => {
-    thermostat.switchPowerSavingModeOff();
-    document.querySelector('#power-saving-status').innerText = 'off';
+  document.querySelector('#PSM_off').addEventListener('click', () => {
+    thermostat.powersave = false;
+    document.querySelector('#power-save-status').innerText = 'off';
     updateTemperature();
   })
-
-  const updateTemperature = () => {
-    document.querySelector('#temperature').innerText = thermostat.temperature;
-    document.querySelector('#temperature').className = thermostat.energyUsage();
-  }
 });
